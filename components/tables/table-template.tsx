@@ -1,12 +1,8 @@
 import List from '@mui/material/List';
 import { TableItem } from './table-item';
 import { Card } from '../ui/card';
-import TableMenu from './table-menu';
 import Box from '@mui/material/Box';
-
-const tableItemStyle = {
-  border: '1px grey',
-};
+import TableMenu from './table-menu';
 
 export default function TableTemplate({ tableTitle = "" }) {
   return (
@@ -14,10 +10,23 @@ export default function TableTemplate({ tableTitle = "" }) {
       <Box suppressHydrationWarning component="section" sx={{ p: 2, border: '1px grey' }}>
         {tableTitle}
       </Box>
+      <TableMenu/>
       <Card> 
-        <List>
-            <TableItem itemName='test'/>
-            <TableItem itemName='test2'/>
+        <List sx={{ maxHeight: '300px', overflow: 'auto' }}>
+          <div style={{ width: '500px'}}>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+            <TableItem itemName='12345678901011121314151617181920'/>
+          </div>
         </List>
       </Card>
     </div>

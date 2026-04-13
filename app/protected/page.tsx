@@ -6,7 +6,6 @@ export default function ProtectedPage() {
   return (
     <div className="flex gap-2">
       <BillTable/>
-      <AISummaryTable/>
     </div>
   );
 }

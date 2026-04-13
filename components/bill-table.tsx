@@ -1,14 +1,13 @@
 import Box from "@mui/material/Box";
 import TableTemplate from "./tables/table-template";
-import TableMenu from "./tables/table-menu";
+import { Button } from "./ui/button";
 
 export function BillTable () {
     return ( 
-        <div>
-            <TableMenu/>
+        <div style={{ border: '1px solid grey' }}>
             <TableTemplate tableTitle="Bills Table"/>
-            <Box component="section" sx={{ p: 2, border: '1px grey' }}>
-                Submit 
+            <Box component="section" sx={{ border: '1px grey' }}>
+                <Button>Submit</Button>
             </Box>
         </div>
     )
