@@ -4,14 +4,8 @@ import { Card } from '../ui/card';
 import TableMenu from './table-menu';
 import Box from '@mui/material/Box';
 
-const style = {
-  py: 0,
-  width: '100%',
-  maxWidth: 360,
-  borderRadius: 2,
-  border: '1px solid',
-  borderColor: 'divider',
-  backgroundColor: 'grey',
+const tableItemStyle = {
+  border: '1px grey',
 };
 
 export default function TableTemplate({ tableTitle = "" }) {
@@ -21,9 +15,9 @@ export default function TableTemplate({ tableTitle = "" }) {
         {tableTitle}
       </Box>
       <Card> 
-        <List sx={style}>
-          <TableItem itemName='Test123'/>
-          <TableItem itemName='Test123'/>
+        <List>
+            <TableItem itemName='test'/>
+            <TableItem itemName='test2'/>
         </List>
       </Card>
     </div>

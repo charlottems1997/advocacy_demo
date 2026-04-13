@@ -4,9 +4,11 @@ import ListItemText from "@mui/material/ListItemText";
 
 export function TableItem ({ itemName= "" }) {
    return (
-        <ListItem>
-            <ListItemText primary={itemName} />
-            <Checkbox/>
-        </ListItem>
+        <div style={{border: '1px solid grey'}}>
+            <ListItem>
+                <ListItemText primary={itemName} />
+                <Checkbox/>
+            </ListItem>
+        </div>
    )
 }
