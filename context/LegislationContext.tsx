@@ -23,7 +23,7 @@ export const LegislationProvider = ({ children }: { children: ReactNode }) => {
       const apiKey = process.env.NEXT_PUBLIC_CONGRESS_API_KEY;
 
       const congressRes = await fetch(
-        `https://api.congress.gov/v3/bill?api_key=${apiKey}&format=json&query=artificial+intelligence&limit=20`,
+        `https://www.loc.gov/search/?q=artificial+intelligence&fa=original-format:legislation&fo=json&at=results&api_key=${apiKey}`,
       );
 
       if (!congressRes.ok) throw new Error("Failed to fetch from Congress.gov");
@@ -32,8 +32,6 @@ export const LegislationProvider = ({ children }: { children: ReactNode }) => {
       const rawBills: Bill[] = congressData.bills || [];
 
       // 2. Use our AI route to filter those bills
-      // In Next.js, the file at app/api/search/ai-legislation.ts
-      // is exposed at the URL path: /api/search/ai-legislation
       const aiRes = await fetch("/googleAPI", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

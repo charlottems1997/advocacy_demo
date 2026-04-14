@@ -53,31 +53,20 @@ export async function POST(req: NextRequest) {
     });
 
     const billData = bills.map((b) => ({ title: b.title, number: b.number }));
+
     const prompt = `
       Review these bills: ${JSON.stringify(billData)}
-      User Interest: "${userTopic}"
-      Return a JSON object containing an array of bill numbers that match the interest.
+      User Interest: "AI Regulation"
+      Determine which bills are most relevant to the user's interest.
+      Then, return the entire list of bills back to me
     `;
 
     const result = await model.generateContent(prompt);
     const text = result.response.text();
 
-    // Parse the JSON safely
-    const parsed = JSON.parse(text || '{"filteredBills": []}');
+    console.log(JSON.stringify(text));
 
-    // --- STEP 6: FIXED ROBUST FILTERING ---
-    // 1. Extract the numbers into a simple string array for easier lookup
-    // 2. Add a fallback to ensure 'filteredBills' exists and is an array
-    const aiSelectedNumbers: string[] = (parsed.filteredBills || [])
-      .map((item: any) => item?.number?.toString())
-      .filter(Boolean); // Removes null/undefined
-
-    // 3. Filter the original bills based on the extracted numbers
-    const finalSelection = bills.filter((originalBill) =>
-      aiSelectedNumbers.includes(originalBill.number),
-    );
-
-    return NextResponse.json(finalSelection);
+    return NextResponse.json(text);
   } catch (error) {
     console.error("Gemini Route Error:", error);
     return NextResponse.json(
