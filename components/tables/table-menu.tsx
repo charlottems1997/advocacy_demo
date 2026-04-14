@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -7,6 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import Box from "@mui/material/Box";
+import { useLegislation } from "../../context/LegislationContext";
 
 const options = [
   "Algorithmic Bias & Discrimination in High-Risk AI",
@@ -27,6 +27,7 @@ export default function TableMenu() {
   const [defaultSelectorValue, setDefaultSelectorValue] = React.useState(
     "Browse Items By Topic",
   );
+  const { searchLegislation } = useLegislation();
 
   const open = Boolean(anchorEl);
 
@@ -42,6 +43,7 @@ export default function TableMenu() {
     setSelectedIndex(index);
     setAnchorEl(null);
     setTextOnSelector(option);
+    searchLegislation(option);
   };
 
   const setTextOnSelector = (option: string) => {
