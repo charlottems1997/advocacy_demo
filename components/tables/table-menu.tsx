@@ -1,69 +1,85 @@
 'use client';
 
 import * as React from 'react';
-import Menu from '@mui/material/Menu';
+import List from '@mui/material/List';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 import MenuItem from '@mui/material/MenuItem';
-import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+
 const options = [
-  'None',
-  'Atria',
-  'Callisto',
-  'Dione',
-  'Ganymede',
-  'Hangouts Call',
-  'Luna',
-  'Oberon',
-  'Phobos',
-  'Pyxis',
-  'Sedna',
-  'Titania',
-  'Triton',
-  'Umbriel',
+  'Algorithmic Bias & Discrimination in High-Risk AI',
+  'AI Transparency, Notice, and Explainability Requirements',
+  'Intellectual Property & AI-Generated Content',
+  'Data Privacy & Automated Decision-Making Technology (ADMT)',
+  'AI Liability, Accountability, and Consumer Protection',
+  'Risk Management & Safety Standards for AI Deployers',
+  'Federal Executive Orders & National AI Policy Implementation',
+  'AI Export Controls, Compute Infrastructure & National Security',
+  'Government Use of AI & Procurement Rules',
+  'Small-Business AI Adoption & Support Programs',
 ];
 
-const ITEM_HEIGHT = 48;
 
 export default function TableMenu() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [selectedIndex, setSelectedIndex] = React.useState(1);
   const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClickListItem = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleMenuItemClick = (
+    event: React.MouseEvent<HTMLElement>,
+    index: number,
+  ) => {
+    setSelectedIndex(index);
+    setAnchorEl(null);
+  };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
 
   return (
     <div>
-      <Button
-        aria-label="more"
-        id="long-button"
-        aria-controls={open ? 'long-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        aria-haspopup="true"
-        onClick={handleClick}
-        variant='outlined'
-        style={{ width: '100%' }}
-      >Search by Topic</Button>
+      <List
+        component="nav"
+        aria-label="Device settings"
+        sx={{ border: '1px solid grey', width: '45%' }}
+      >
+        <ListItemButton
+          id="lock-button"
+          aria-haspopup="listbox"
+          aria-controls="lock-menu"
+          aria-label="when device is locked"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClickListItem}
+        >
+          <ListItemText
+            primary="Browse Items By Topic"
+          />
+        </ListItemButton>
+      </List>
       <Menu
-        id="long-menu"
+        id="lock-menu"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         slotProps={{
-          paper: {
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: '20ch',
-            },
-          },
           list: {
-            'aria-labelledby': 'long-button',
+            'aria-labelledby': 'lock-button',
+            role: 'listbox',
           },
         }}
       >
-        {options.map((option) => (
-          <MenuItem key={option} selected={option === 'Pyxis'} onClick={handleClose}>
+        {options.map((option, index) => (
+          <MenuItem
+            key={option}
+            disabled={index === 0}
+            selected={index === selectedIndex}
+            onClick={(event) => handleMenuItemClick(event, index)}
+          >
             {option}
           </MenuItem>
         ))}
